@@ -3,6 +3,12 @@
 import RansomWord from "@/components/ransom/RansomWord";
 import { techCategories } from "@/lib/data";
 
+interface TechItem {
+  name: string;
+  color: string;
+  label?: string;
+}
+
 export default function TechStack() {
   return (
     <section id="stack" className="px-6 md:px-[60px] py-[80px] relative z-10 w-full">
@@ -26,7 +32,7 @@ export default function TechStack() {
               </span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
-              {group.items.map((item: any, i) => (
+              {group.items.map((item: TechItem, i) => (
                 <div 
                   key={i}
                   className="flex items-center gap-3 p-3.5 border-[1.5px] border-[#c8b88a] bg-paper-dark relative transition-all duration-200 cursor-none hover:scale-105 hover:-rotate-1 hover:shadow-[4px_4px_0_rgba(26,21,8,0.1)] tech-chip"

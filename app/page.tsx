@@ -8,7 +8,6 @@ import {
   achievements,
   heroWords,
   personalInfo,
-  quickStats,
   selectedWork,
   techCategories,
   education,
