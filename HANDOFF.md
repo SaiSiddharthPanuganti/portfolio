@@ -21,10 +21,23 @@
 - Kept and used **GSAP** for scroll-linked parallax interactions.
 - Added and tuned animated sections/cards while preserving smooth scroll behavior.
 
-### 3. 3D background
-- Added scroll-reactive 3D background behavior in `components/three/NoiseBackground.tsx`.
-- Added floating 3D shapes + shader particles.
-- Later optimized for performance (reduced particle/mesh complexity and canvas cost).
+### 3. Vintage Typewriter Greeting, 3D Crumpled Parchment, & Notebook Lines Background (May 21, 2026)
+
+- **Carrier Pigeon Animation**: Slowed down the duration of the pigeon's flight overlay in [page.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/page.tsx) from `3.2s` to `6.0s` and slightly reduced the wing-flapping speed to `0.22s` to make the flight look far more graceful and natural.
+- **Interactive Typewriter Greeting**:
+  - Built [TypewriterGreeting.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/components/ui/TypewriterGreeting.tsx) to type out: `Hello visitor! I am Sai Siddharth Panuganti.`
+  - Simulates variable human/mechanical typing cadence (delays randomized between 40ms and 250ms).
+  - Employs a custom CSS key-strike animation (scale-pop) and ink-bleed visual transition (characters start slightly blurred and fade in, simulating wet ink drying).
+  - Employs a stable deterministic function to apply minor rotative/vertical stamp offsets to every letter, mirroring the mechanical imperfections of vintage stamps.
+  - Synthesizes organic, randomized mechanical click-clack key-down clicks, spacebar hollow thuds, and a carriage return bell chime procedurally using the Web Audio API (`AudioContext`).
+  - Added a vintage toggle switch (`🔊/🔇`) to let users easily unmute/mute typing sounds.
+- **3D Crumpled Parchment & Notebook Lines Background**:
+  - Created [PaperBackground.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/components/ui/PaperBackground.tsx) to render a dynamic 3D lighting texture overlay simulating crumpled and folded vintage sepia paper.
+  - Embedded an SVG filter utilizing `<feTurbulence>`, `<feDiffuseLighting>` (specifying azimuth `55°`, elevation `50°`, and surfaceScale `2.8`), and `<feBlend mode="multiply">` to compute realistic highlight and shadow heights based on fractal noise.
+  - Placed the crumpled filter overlay on a fixed background layer so that page texts remain sharp and legible while the background creases realistically.
+  - Set up background layers including a vertical red margin line at `76px`, thin vertical grid columns spaced at `56px`, and blue-grey horizontal rulings spaced at `28px` directly under the paper texture layer.
+  - Cleaned up [globals.css](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/globals.css) and replaced the legacy `BurntEdges.tsx` component in [layout.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/layout.tsx).
+- **Verification**: Completed a clean production build (`npm run build`) with zero compiler warnings or errors.
 
 ### 4. Performance fixes (major lag reduction)
 - Removed duplicate scene rendering from `app/page.tsx` (Scene remains in layout only).
