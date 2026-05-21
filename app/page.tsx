@@ -30,6 +30,10 @@ export default function Home() {
   const [isFlying, setIsFlying] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [sendSuccess, setSendSuccess] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [hasFlightCompleted, setHasFlightCompleted] = useState(false);
 
   useEffect(() => {
     // Native scroll progress bar
@@ -77,6 +81,14 @@ export default function Home() {
     // Sync caffeine changes with external listeners (CustomCursor, NoiseBackground)
     window.dispatchEvent(new CustomEvent("caffeine-change", { detail: { level: coffeeCount } }));
   }, [coffeeCount]);
+
+  useEffect(() => {
+    // Show success screen only when flight finishes and API call resolves
+    if (hasFlightCompleted && !isSending) {
+      setIsFlying(false);
+      setShowSuccess(true);
+    }
+  }, [hasFlightCompleted, isSending]);
 
   return (
     <main
@@ -689,8 +701,32 @@ export default function Home() {
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (isFlying) return;
+                  if (isFlying || isSending) return;
                   setIsFlying(true);
+                  setIsSending(true);
+                  setSendSuccess(false);
+                  setSendError(null);
+                  setHasFlightCompleted(false);
+
+                  fetch("/api/send", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, message }),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.success) {
+                        setSendSuccess(true);
+                      } else {
+                        setSendError(data.error || "Failed to send message automatically.");
+                      }
+                    })
+                    .catch((err) => {
+                      setSendError(err.message || "A network error occurred.");
+                    })
+                    .finally(() => {
+                      setIsSending(false);
+                    });
                 }}
                 className="grid gap-4 w-full"
               >
@@ -750,15 +786,27 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="grid gap-5 w-full bg-paper/5 border border-paper/10 rounded-2xl p-5 text-paper"
               >
-                <div className="flex items-start gap-3">
-                  <span className="text-3xl">🕊️</span>
-                  <div>
-                    <h4 className="font-playfair text-lg font-black text-paper">Carrier Pigeon Dispatched!</h4>
-                    <p className="font-sans text-[13px] text-paper/70 mt-1 leading-relaxed">
-                      Your message details have been prepared. How would you like to deliver them?
-                    </p>
+                {sendSuccess ? (
+                  <div className="flex items-start gap-3">
+                    <span className="text-3xl">🕊️</span>
+                    <div>
+                      <h4 className="font-playfair text-lg font-black text-paper">Message Sent Directly!</h4>
+                      <p className="font-sans text-[13px] text-paper/70 mt-1 leading-relaxed">
+                        Your carrier pigeon successfully delivered the message directly to my inbox via the Resend API. I&apos;ll get back to you soon!
+                      </p>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="flex items-start gap-3">
+                    <span className="text-3xl">🌩️</span>
+                    <div>
+                      <h4 className="font-playfair text-lg font-black text-red">Pigeon Encountered a Storm!</h4>
+                      <p className="font-sans text-[13px] text-paper/70 mt-1 leading-relaxed">
+                        Automatic delivery failed ({sendError || "Connection error"}). No worries—your message is safe! Please use the fallbacks below to send it:
+                      </p>
+                    </div>
+                  </div>
+                )}
 
                 <div className="flex flex-col gap-3 mt-1">
                   <a
@@ -767,7 +815,7 @@ export default function Home() {
                     rel="noreferrer"
                     className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-paper text-ink py-3 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#2a5a2e] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#2a5a2e] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                   >
-                    <span>1. Open Email Client ↗</span>
+                    <span>Open Email Client ↗</span>
                   </a>
 
                   <button
@@ -780,13 +828,16 @@ export default function Home() {
                     }}
                     className="w-full flex items-center justify-center gap-2 rounded-xl border border-paper bg-ink py-3 font-mono text-[11px] uppercase tracking-[0.14em] font-bold text-paper shadow-[2px_2px_0px_0px_#1a1508] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#1a1508] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                   >
-                    <span>{copied ? "Copied! ✓" : "2. Copy to Clipboard 📋"}</span>
+                    <span>{copied ? "Copied! ✓" : "Copy to Clipboard 📋"}</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => {
                       setShowSuccess(false);
+                      setSendSuccess(false);
+                      setSendError(null);
+                      setHasFlightCompleted(false);
                       setName("");
                       setEmail("");
                       setMessage("");
@@ -859,8 +910,7 @@ export default function Home() {
                 ease: [0.4, 0.05, 0.2, 0.95] 
               }}
               onAnimationComplete={() => {
-                setIsFlying(false);
-                setShowSuccess(true);
+                setHasFlightCompleted(true);
               }}
               className="absolute w-24 h-24 text-ink flex flex-col items-center justify-center"
             >
