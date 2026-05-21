@@ -26,6 +26,7 @@
 - **Carrier Pigeon Animation**: Slowed down the duration of the pigeon's flight overlay in [page.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/page.tsx) from `3.2s` to `6.0s` and slightly reduced the wing-flapping speed to `0.22s` to make the flight look far more graceful and natural.
 - **Interactive Typewriter Greeting**:
   - Built [TypewriterGreeting.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/components/ui/TypewriterGreeting.tsx) to type out: `Hello visitor! I am Sai Siddharth Panuganti.`
+  - Increased typewriter font size from `text-sm sm:text-base md:text-lg` to `text-lg sm:text-xl md:text-2xl lg:text-3xl` to make the visitor greeting and user's name stand out significantly.
   - Simulates variable human/mechanical typing cadence (delays randomized between 40ms and 250ms).
   - Employs a custom CSS key-strike animation (scale-pop) and ink-bleed visual transition (characters start slightly blurred and fade in, simulating wet ink drying).
   - Employs a stable deterministic function to apply minor rotative/vertical stamp offsets to every letter, mirroring the mechanical imperfections of vintage stamps.
