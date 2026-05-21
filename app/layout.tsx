@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import dynamic from "next/dynamic";
 import CustomCursor from "@/components/cursor/CustomCursor";
 import PaperBackground from "@/components/ui/PaperBackground";
 import { Analytics } from "@vercel/analytics/next";
-
-const Scene = dynamic(() => import("@/components/three/Scene"), { ssr: false });
 
 export const metadata: Metadata = {
   title: "Sai Siddharth - Portfolio",
@@ -28,7 +25,6 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <Scene />
         <PaperBackground />
         <CustomCursor />
         {children}
