@@ -24,6 +24,10 @@ export default function Home() {
   const [timeStr, setTimeStr] = useState("");
   const [statusText, setStatusText] = useState("cooking");
   const [coffeeCount, setCoffeeCount] = useState(3);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isFlying, setIsFlying] = useState(false);
 
   useEffect(() => {
     // Native scroll progress bar
@@ -298,21 +302,14 @@ export default function Home() {
               </motion.button>
             </div>
 
-            {/* Mail & Resume action buttons */}
-            <div className="mt-4 flex gap-2">
-              <a 
-                href={`mailto:${personalInfo.email}`} 
-                data-hover="true" 
-                className="flex-1 flex justify-center items-center rounded-xl bg-ink text-paper py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#c8271e] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#c8271e] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-              >
-                mail me
-              </a>
+            {/* Resume action button */}
+            <div className="mt-4">
               <a 
                 href={personalInfo.resumeHref} 
                 target="_blank"
                 rel="noreferrer"
                 data-hover="true"
-                className="flex-1 flex justify-center items-center rounded-xl border border-ink bg-paper py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#1a1508] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#1a1508] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                className="w-full flex justify-center items-center rounded-xl border border-ink bg-paper py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#1a1508] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#1a1508] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               >
                 resume
               </a>
@@ -685,16 +682,94 @@ export default function Home() {
         >
           <div className="font-playfair text-3xl italic leading-tight md:text-4xl">&ldquo;Let&apos;s build something useful.&rdquo;</div>
           
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a href={`mailto:${personalInfo.email}`} data-hover="true" className="rounded-full bg-paper px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink transition hover:bg-paper-light">
-              {personalInfo.email}
-            </a>
-            <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" data-hover="true" className="rounded-full border border-paper/40 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] transition hover:bg-paper/10">
-              LinkedIn
-            </a>
-            <a href={personalInfo.github} target="_blank" rel="noreferrer" data-hover="true" className="rounded-full border border-paper/40 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] transition hover:bg-paper/10">
-              GitHub
-            </a>
+          <div className="grid gap-8 md:grid-cols-2 mt-8 items-start">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (isFlying) return;
+                setIsFlying(true);
+              }}
+              className="grid gap-4 w-full"
+            >
+              <div>
+                <label htmlFor="contact-name" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Name</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your Name"
+                  className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-email" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Email</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your.email@example.com"
+                  className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Message</label>
+                <textarea
+                  id="contact-message"
+                  required
+                  rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Write your message here..."
+                  className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all resize-none"
+                />
+              </div>
+
+              {/* Pigeon Send Button */}
+              <motion.button
+                type="submit"
+                whileTap={{ scale: 0.98 }}
+                className="relative overflow-hidden w-full mt-2 flex items-center justify-center gap-2.5 rounded-xl bg-paper text-ink py-3 font-mono text-[11px] uppercase tracking-[0.15em] font-bold shadow-[2px_2px_0px_0px_#2a5a2e] transition-all hover:bg-paper-light active:shadow-none"
+              >
+                <span>Send via Carrier Pigeon</span>
+                {/* Pigeon Icon */}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-red">
+                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z" />
+                </svg>
+              </motion.button>
+            </form>
+
+            {/* Side Callout & Links */}
+            <div className="flex flex-col justify-between h-full py-2">
+              <div>
+                <p className="font-sans text-sm text-paper/70 leading-relaxed">
+                  Have an internship opening, a project idea, or just want to say hi? Fill out the form and a carrier pigeon will prepare a draft message to my inbox instantly.
+                </p>
+                <div className="mt-8 flex flex-col gap-4">
+                  <div>
+                    <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-paper/40 mb-1">Direct Mail</div>
+                    <a href={`mailto:${personalInfo.email}`} data-hover="true" className="font-mono text-xs text-paper underline decoration-paper/30 hover:decoration-paper transition-all">
+                      {personalInfo.email}
+                    </a>
+                  </div>
+                  <div>
+                    <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-paper/40 mb-1">Professional network</div>
+                    <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" data-hover="true" className="font-mono text-xs text-paper underline decoration-paper/30 hover:decoration-paper transition-all">
+                      linkedin.com/in/sai-siddharth
+                    </a>
+                  </div>
+                  <div>
+                    <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-paper/40 mb-1">Source Code</div>
+                    <a href={personalInfo.github} target="_blank" rel="noreferrer" data-hover="true" className="font-mono text-xs text-paper underline decoration-paper/30 hover:decoration-paper transition-all">
+                      github.com/SaiSiddharthPanuganti
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <footer className="mt-12 border-t border-paper/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-paper/45 font-mono text-[9px] uppercase tracking-wider">
@@ -704,6 +779,67 @@ export default function Home() {
           </footer>
         </motion.div>
       </section>
+
+      {/* Full-screen Carrier Pigeon Animation Overlay */}
+      <AnimatePresence>
+        {isFlying && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 pointer-events-none bg-paper/20 backdrop-blur-[1px] overflow-hidden"
+          >
+            <motion.div
+              initial={{ x: "-20vw", y: "85vh", rotate: -15, scale: 0.8 }}
+              animate={{ 
+                x: "120vw", 
+                y: "15vh", 
+                rotate: [0, -10, 5, -15, 0],
+                scale: [0.8, 1.2, 1.2, 0.9, 0.7]
+              }}
+              transition={{ 
+                duration: 3.2, 
+                ease: [0.4, 0.05, 0.2, 0.95] 
+              }}
+              onAnimationComplete={() => {
+                setIsFlying(false);
+                const mailtoUrl = `mailto:${personalInfo.email}?subject=Message from ${encodeURIComponent(name)}&body=Sender Name: ${encodeURIComponent(name)}%0D%0ASender Email: ${encodeURIComponent(email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+                window.location.href = mailtoUrl;
+                setName("");
+                setEmail("");
+                setMessage("");
+              }}
+              className="absolute w-24 h-24 text-ink flex flex-col items-center justify-center"
+            >
+              {/* Flying Bird SVG */}
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path 
+                  d="M16 36C22 36 28 32 34 26C37 23 44 23 46 25L52 26C54 26.5 56 25 56 23C56 22 55 21 54 21L45 20C41 20 37 22 34 25C28 30 22 33 16 33C12 33 8 31 6 29C6 31 10 36 16 36Z" 
+                  fill="currentColor" 
+                />
+                <line x1="33" y1="28" x2="35" y2="33" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="36" y1="28" x2="38" y2="33" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                
+                <g transform="translate(28, 32) rotate(8)">
+                  <rect width="16" height="10" rx="1.5" fill="#f9f0e0" stroke="currentColor" strokeWidth="2" />
+                  <path d="M0 0 L8 5 L16 0" stroke="currentColor" strokeWidth="2" fill="none" />
+                </g>
+                
+                <motion.path
+                  d="M28 25C24 12 16 6 12 6C9 6 8 10 11 16C14 22 21 26 28 25Z"
+                  fill="currentColor"
+                  style={{ originX: "28px", originY: "25px" }}
+                  animate={{ rotate: [-30, 40, -30] }}
+                  transition={{ repeat: Infinity, duration: 0.18, ease: "easeInOut" }}
+                />
+              </svg>
+              <span className="font-mono text-[9px] uppercase tracking-wider text-red font-bold mt-1 bg-paper px-2 py-0.5 rounded-full shadow-sm border border-ink/10">
+                sending...
+              </span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
