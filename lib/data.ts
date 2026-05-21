@@ -180,3 +180,70 @@ export const leadership = [
   }
 ];
 
+export interface Certification {
+  title: string;
+  issuer: string;
+  issued: string;
+  link: string;
+}
+
+export const ciscoCertifications: Certification[] = [
+  {
+    title: "Enterprise Networking, Security, & Automation",
+    issuer: "Cisco",
+    issued: "Apr 2026",
+    link: "https://www.credly.com/earner/earned/badge/5756a86f-6c02-4770-aba9-63f4ff3bb237",
+  },
+  {
+    title: "Switching, Routing, & Wireless Essentials",
+    issuer: "Cisco",
+    issued: "Apr 2026",
+    link: "https://www.credly.com/earner/earned/badge/f033366b-5540-4ad4-8fdd-d842e78425b3",
+  },
+  {
+    title: "Introduction to Networks",
+    issuer: "Cisco",
+    issued: "Dec 2024",
+    link: "https://www.credly.com/earner/earned/badge/ed50ab47-5fd8-4a22-be00-a750534ce33d",
+  },
+  {
+    title: "Introduction to Cybersecurity",
+    issuer: "Cisco",
+    issued: "Aug 2024",
+    link: "https://www.credly.com/earner/earned/badge/9744fe4f-9664-4ff5-a718-1cf298a86d2b",
+  },
+];
+
+export const googleCertifications: Certification[] = [
+  {
+    title: "Explore Generative AI with the Vertex AI Gemini API",
+    issuer: "Google",
+    issued: "May 2025",
+    link: "https://www.credly.com/earner/earned/badge/f033366b-5540-4ad4-8fdd-d842e78425b3",
+  },
+  {
+    title: "Inspect Rich Documents with Gemini Multimodality & Multimodal RAG",
+    issuer: "Google",
+    issued: "May 2025",
+    link: "https://www.credly.com/earner/earned/badge/df638ea9-e5ec-4bb3-b578-761fdba114dd",
+  },
+  {
+    title: "Develop GenAI Apps with Gemini and Streamlit",
+    issuer: "Google",
+    issued: "May 2025",
+    link: "https://www.credly.com/earner/earned/badge/54727db5-bd16-4b2e-8ef1-357295a9e23c",
+  },
+  {
+    title: "Build Real World AI Applications with Gemini and Imagen",
+    issuer: "Google",
+    issued: "May 2025",
+    link: "https://www.credly.com/earner/earned/badge/52dfa7bb-6bf1-473d-aa68-2ad8b2acfa7e",
+  },
+  {
+    title: "Prompt Design in Vertex AI",
+    issuer: "Google",
+    issued: "May 2025",
+    link: "https://www.credly.com/earner/earned/badge/48a1350e-58eb-498b-8065-ef8088c79682",
+  },
+];
+
