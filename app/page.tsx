@@ -166,7 +166,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.65 }}
-            className="relative rounded-3xl border border-ink/15 bg-paper-dark/70 p-5 shadow-[0_14px_30px_rgba(18,40,74,0.12)] backdrop-blur overflow-hidden"
+            className="relative rounded-3xl border border-ink/15 bg-paper-dark/70 p-5 shadow-[0_14px_30px_rgba(18,40,74,0.12)] backdrop-blur"
           >
             {/* Ticket header badge */}
             <div className="absolute top-0 left-0 bg-ink text-paper px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] rounded-br-xl font-bold">

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 const GREETING_TEXT = "Hello visitor! I am Sai Siddharth Panuganti.";
 
@@ -152,18 +153,6 @@ export default function TypewriterGreeting() {
     return () => clearTimeout(timer);
   }, [displayedCount, isMuted]);
 
-  // Deterministic physical stamps offsets (prevents elements shifting on re-render)
-  const getCharStyle = (index: number) => {
-    // Generate organic typewriter key alignment offsets
-    const sinRotate = Math.sin(index * 32.8) * 2.2;
-    const sinY = Math.cos(index * 47.3) * 1.3;
-    const opacity = 0.85 + Math.sin(index * 19.4) * 0.15;
-    return {
-      transform: `rotate(${sinRotate}deg) translateY(${sinY}px)`,
-      opacity,
-    };
-  };
-
   const handleToggleSound = () => {
     // Resume audio context inside click gesture to unlock browser block
     try {
@@ -196,22 +185,24 @@ export default function TypewriterGreeting() {
         <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-ink tracking-wide leading-relaxed min-h-[36px] max-w-full flex flex-wrap justify-center">
           {GREETING_TEXT.split("").map((char, index) => {
             if (index >= displayedCount) return null;
+            const sinRotate = Math.sin(index * 32.8) * 2.2;
+            const sinY = Math.cos(index * 47.3) * 1.3;
+            const targetOpacity = 0.85 + Math.sin(index * 19.4) * 0.15;
+
             return (
-              <span
+              <motion.span
                 key={index}
-                className="typewriter-char-wrapper"
+                initial={{ filter: "blur(2.5px)", opacity: 0, scale: 1.3, y: sinY - 2, rotate: sinRotate }}
+                animate={{ filter: "blur(0px)", opacity: targetOpacity, scale: 1, y: sinY, rotate: sinRotate }}
+                transition={{ duration: 0.28, ease: [0.18, 0.89, 0.32, 1.28] }}
                 style={{
                   display: "inline-block",
                   whiteSpace: "pre",
+                  transformOrigin: "center bottom",
                 }}
               >
-                <span
-                  style={getCharStyle(index)}
-                  className="inline-block"
-                >
-                  {char}
-                </span>
-              </span>
+                {char}
+              </motion.span>
             );
           })}
 

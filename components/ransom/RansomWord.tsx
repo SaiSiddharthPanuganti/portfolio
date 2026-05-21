@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import gsap from "gsap";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface RansomWordProps {
@@ -17,6 +17,8 @@ export default function RansomWord({ original, className, variant = 1, animateDe
   const wordRef = useRef<HTMLSpanElement>(null);
   const [text, setText] = useState(original);
   const [isScrambling, setIsScrambling] = useState(false);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
   // Styling based on prototype
   const variantStyles: Record<number, string> = {
@@ -34,48 +36,20 @@ export default function RansomWord({ original, className, variant = 1, animateDe
     12: "font-playfair font-black text-[clamp(34px,5.5vw,66px)] bg-paper text-green underline decoration-green underline-offset-8 decoration-4 rotate-1",
   };
 
-  useEffect(() => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
     const el = wordRef.current;
     if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    setX((e.clientX - cx) * 0.25);
+    setY((e.clientY - cy) * 0.25);
+  };
 
-    // Entry animation
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, delay: animateDelay, ease: "power2.out" }
-    );
-
-    // Magnetic effect — throttled to reduce layout thrashing
-    const xTo = gsap.quickTo(el, "x", { duration: 0.25, ease: "power3" });
-    const yTo = gsap.quickTo(el, "y", { duration: 0.25, ease: "power3" });
-    let rafPending = false;
-    let latestE: MouseEvent | null = null;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      latestE = e;
-      if (rafPending) return;
-      rafPending = true;
-      requestAnimationFrame(() => {
-        rafPending = false;
-        if (!latestE) return;
-        const rect = el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        xTo((latestE.clientX - cx) * 0.2);
-        yTo((latestE.clientY - cy) * 0.2);
-      });
-    };
-
-    const handleMouseLeave = () => { xTo(0); yTo(0); };
-
-    el.addEventListener("mousemove", handleMouseMove);
-    el.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      el.removeEventListener("mousemove", handleMouseMove);
-      el.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, [animateDelay]);
+  const handleMouseLeave = () => {
+    setX(0);
+    setY(0);
+  };
 
   const triggerScramble = () => {
     if (isScrambling) return;
@@ -104,18 +78,30 @@ export default function RansomWord({ original, className, variant = 1, animateDe
   };
 
   return (
-    <span
+    <motion.span
       ref={wordRef}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: y, x: x }}
+      transition={{
+        opacity: { duration: 0.5, delay: animateDelay, ease: "easeOut" },
+        y: x === 0 && y === 0 
+          ? { duration: 0.5, delay: animateDelay, ease: "easeOut" } 
+          : { type: "spring", stiffness: 150, damping: 15 },
+        x: { type: "spring", stiffness: 150, damping: 15 }
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={triggerScramble}
       className={cn(
         "word inline-block px-3 py-1 mx-1 my-1 origin-bottom select-none transition-shadow duration-150 relative",
         variantStyles[variant],
         isScrambling && "scrambling",
         className
       )}
-      onMouseEnter={triggerScramble}
       data-hover="true"
+      style={{ display: "inline-block" }}
     >
       {text}
-    </span>
+    </motion.span>
   );
 }
