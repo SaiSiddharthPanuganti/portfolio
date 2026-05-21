@@ -48,7 +48,7 @@ export default function PaperBackground() {
         <div
           className="w-full h-full"
           style={{
-            backgroundColor: "#f5eedc",
+            backgroundColor: "#faf7ee",
             backgroundImage: `
               /* Vertical red margin line */
               linear-gradient(90deg, transparent 0 76px, rgba(200, 39, 30, 0.35) 76px 78px, transparent 78px 100%),
@@ -60,7 +60,7 @@ export default function PaperBackground() {
               url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E"),
               
               /* Aged radial vignette color gradient matching user's reference image */
-              radial-gradient(circle, #f3ead5 15%, #e9dabe 45%, #cca572 75%, #a68453 100%)
+              radial-gradient(circle, #f9f5ea 15%, #f4eddf 45%, #e6d2b9 75%, #d3c2a9 100%)
             `,
             backgroundBlendMode: "normal, normal, normal, normal",
           }}
