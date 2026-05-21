@@ -93,7 +93,7 @@ export default function Home() {
 
   return (
     <main
-      className="relative min-h-screen overflow-x-hidden bg-paper text-ink"
+      className="relative min-h-screen overflow-x-hidden bg-transparent text-ink"
       style={{ cursor: "none" }}
     >
       <div ref={barRef} className="fixed left-0 top-0 z-50 h-[3px] w-full origin-left bg-red" style={{ transform: "scaleX(0)" }} />

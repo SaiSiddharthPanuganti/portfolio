@@ -42,8 +42,8 @@ export default function PaperBackground() {
 
       {/* Screen-size background overlay with 3D crumpled filter applied */}
       <div
-        className="fixed inset-0 pointer-events-none select-none z-0"
-        style={{ filter: "url(#paper-wrinkles)" }}
+        className="fixed inset-0 pointer-events-none select-none"
+        style={{ filter: "url(#paper-wrinkles)", zIndex: -10 }}
       >
         <div
           className="w-full h-full"
