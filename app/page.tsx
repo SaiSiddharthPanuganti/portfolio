@@ -28,6 +28,8 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isFlying, setIsFlying] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     // Native scroll progress bar
@@ -683,64 +685,119 @@ export default function Home() {
           <div className="font-playfair text-3xl italic leading-tight md:text-4xl">&ldquo;Let&apos;s build something useful.&rdquo;</div>
           
           <div className="grid gap-8 md:grid-cols-2 mt-8 items-start">
-            <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (isFlying) return;
-                setIsFlying(true);
-              }}
-              className="grid gap-4 w-full"
-            >
-              <div>
-                <label htmlFor="contact-name" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Name</label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Name"
-                  className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all"
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Email</label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your.email@example.com"
-                  className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all"
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-message" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Message</label>
-                <textarea
-                  id="contact-message"
-                  required
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Write your message here..."
-                  className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all resize-none"
-                />
-              </div>
-
-              {/* Pigeon Send Button */}
-              <motion.button
-                type="submit"
-                whileTap={{ scale: 0.98 }}
-                className="relative overflow-hidden w-full mt-2 flex items-center justify-center gap-2.5 rounded-xl bg-paper text-ink py-3 font-mono text-[11px] uppercase tracking-[0.15em] font-bold shadow-[2px_2px_0px_0px_#2a5a2e] transition-all hover:bg-paper-light active:shadow-none"
+            {!showSuccess ? (
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (isFlying) return;
+                  setIsFlying(true);
+                }}
+                className="grid gap-4 w-full"
               >
-                <span>Send via Carrier Pigeon</span>
-                {/* Pigeon Icon */}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-red">
-                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z" />
-                </svg>
-              </motion.button>
-            </form>
+                <div>
+                  <label htmlFor="contact-name" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Name</label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your Name"
+                    className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Email</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your.email@example.com"
+                    className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="block font-mono text-[9px] uppercase tracking-[0.15em] text-paper/60 mb-1.5 font-bold">Message</label>
+                  <textarea
+                    id="contact-message"
+                    required
+                    rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Write your message here..."
+                    className="w-full bg-paper/10 border border-paper/20 rounded-xl px-4 py-2.5 font-mono text-xs text-paper placeholder-paper/30 focus:outline-none focus:border-red focus:ring-1 focus:ring-red transition-all resize-none"
+                  />
+                </div>
+
+                {/* Pigeon Send Button */}
+                <motion.button
+                  type="submit"
+                  whileTap={{ scale: 0.98 }}
+                  className="relative overflow-hidden w-full mt-2 flex items-center justify-center gap-2.5 rounded-xl bg-paper text-ink py-3 font-mono text-[11px] uppercase tracking-[0.15em] font-bold shadow-[2px_2px_0px_0px_#2a5a2e] transition-all hover:bg-paper-light active:shadow-none"
+                >
+                  <span>Send via Carrier Pigeon</span>
+                  {/* Pigeon Icon */}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-red">
+                    <path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z" />
+                  </svg>
+                </motion.button>
+              </form>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="grid gap-5 w-full bg-paper/5 border border-paper/10 rounded-2xl p-5 text-paper"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="text-3xl">🕊️</span>
+                  <div>
+                    <h4 className="font-playfair text-lg font-black text-paper">Carrier Pigeon Dispatched!</h4>
+                    <p className="font-sans text-[13px] text-paper/70 mt-1 leading-relaxed">
+                      Your message details have been prepared. How would you like to deliver them?
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 mt-1">
+                  <a
+                    href={`mailto:${personalInfo.email}?subject=Message from ${encodeURIComponent(name)}&body=Sender Name: ${encodeURIComponent(name)}%0D%0ASender Email: ${encodeURIComponent(email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-paper text-ink py-3 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#2a5a2e] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#2a5a2e] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                  >
+                    <span>1. Open Email Client ↗</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const fullText = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+                      navigator.clipboard.writeText(fullText);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                    className="w-full flex items-center justify-center gap-2 rounded-xl border border-paper bg-ink py-3 font-mono text-[11px] uppercase tracking-[0.14em] font-bold text-paper shadow-[2px_2px_0px_0px_#1a1508] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#1a1508] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                  >
+                    <span>{copied ? "Copied! ✓" : "2. Copy to Clipboard 📋"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowSuccess(false);
+                      setName("");
+                      setEmail("");
+                      setMessage("");
+                    }}
+                    className="mt-2 text-center font-mono text-[9px] uppercase tracking-wider text-paper/40 hover:text-paper/80 transition-colors font-semibold"
+                  >
+                    ↺ Send Another Message
+                  </button>
+                </div>
+              </motion.div>
+            )}
 
             {/* Side Callout & Links */}
             <div className="flex flex-col justify-between h-full py-2">
@@ -803,11 +860,7 @@ export default function Home() {
               }}
               onAnimationComplete={() => {
                 setIsFlying(false);
-                const mailtoUrl = `mailto:${personalInfo.email}?subject=Message from ${encodeURIComponent(name)}&body=Sender Name: ${encodeURIComponent(name)}%0D%0ASender Email: ${encodeURIComponent(email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
-                window.location.href = mailtoUrl;
-                setName("");
-                setEmail("");
-                setMessage("");
+                setShowSuccess(true);
               }}
               className="absolute w-24 h-24 text-ink flex flex-col items-center justify-center"
             >
