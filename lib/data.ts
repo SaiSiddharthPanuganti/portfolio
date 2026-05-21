@@ -4,6 +4,7 @@ export const personalInfo = {
   subHeadline: "ML builder · Full-stack developer · Problem solver",
   location: "Hyderabad, India",
   email: "saisiddharthpanuganti@gmail.com",
+  phone: "+91 6301727634",
   linkedin: "https://www.linkedin.com/in/sai-siddharth-panuganti-b2b365270/",
   dribbble: "#",
   github: "https://github.com/SaiSiddharthPanuganti",

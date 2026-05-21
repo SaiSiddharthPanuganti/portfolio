@@ -809,12 +809,6 @@ export default function Home() {
                 )}
 
                 <div className="flex flex-col gap-3 mt-1">
-                  <a
-                    href={`mailto:${personalInfo.email}?subject=Message from ${encodeURIComponent(name)}&body=Sender Name: ${encodeURIComponent(name)}%0D%0ASender Email: ${encodeURIComponent(email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`}
-                    className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-paper text-ink py-3 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#2a5a2e] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#2a5a2e] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-                  >
-                    <span>Open Email Client ↗</span>
-                  </a>
 
                   <button
                     type="button"
@@ -859,6 +853,12 @@ export default function Home() {
                     <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-paper/40 mb-1">Direct Mail</div>
                     <a href={`mailto:${personalInfo.email}`} data-hover="true" className="font-mono text-xs text-paper underline decoration-paper/30 hover:decoration-paper transition-all">
                       {personalInfo.email}
+                    </a>
+                  </div>
+                  <div>
+                    <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-paper/40 mb-1">Phone Number</div>
+                    <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} data-hover="true" className="font-mono text-xs text-paper underline decoration-paper/30 hover:decoration-paper transition-all">
+                      {personalInfo.phone}
                     </a>
                   </div>
                   <div>
