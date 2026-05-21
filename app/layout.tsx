@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import CustomCursor from "@/components/cursor/CustomCursor";
+import { Analytics } from "@vercel/analytics/next";
 
 const Scene = dynamic(() => import("@/components/three/Scene"), { ssr: false });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         <Scene />
         <CustomCursor />
         {children}
+        <Analytics />
       </body>
     </html>
   );
