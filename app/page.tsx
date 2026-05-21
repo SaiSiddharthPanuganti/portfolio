@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RansomWord from "@/components/ransom/RansomWord";
 import ScratchReveal from "@/components/sections/ScratchReveal";
+import TypewriterGreeting from "@/components/ui/TypewriterGreeting";
 import {
   achievements,
   heroWords,
@@ -130,7 +131,9 @@ export default function Home() {
       </motion.div>
 
       {/* Hero Section */}
-      <section className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-12 pt-24 md:px-10">
+      <section className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-12 pt-16 md:px-10">
+        <TypewriterGreeting />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -904,7 +907,7 @@ export default function Home() {
                 scale: [0.8, 1.2, 1.2, 0.9, 0.7]
               }}
               transition={{ 
-                duration: 3.2, 
+                duration: 6.0, 
                 ease: [0.4, 0.05, 0.2, 0.95] 
               }}
               onAnimationComplete={() => {
@@ -931,7 +934,7 @@ export default function Home() {
                   fill="currentColor"
                   style={{ originX: "28px", originY: "25px" }}
                   animate={{ rotate: [-30, 40, -30] }}
-                  transition={{ repeat: Infinity, duration: 0.18, ease: "easeInOut" }}
+                  transition={{ repeat: Infinity, duration: 0.22, ease: "easeInOut" }}
                 />
               </svg>
               <span className="font-mono text-[9px] uppercase tracking-wider text-red font-bold mt-1 bg-paper px-2 py-0.5 rounded-full shadow-sm border border-ink/10">

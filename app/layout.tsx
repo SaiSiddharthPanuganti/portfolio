@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import CustomCursor from "@/components/cursor/CustomCursor";
+import BurntEdges from "@/components/ui/BurntEdges";
 import { Analytics } from "@vercel/analytics/next";
 
 const Scene = dynamic(() => import("@/components/three/Scene"), { ssr: false });
@@ -28,6 +29,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Scene />
+        <BurntEdges />
         <CustomCursor />
         {children}
         <Analytics />

@@ -14,13 +14,14 @@
   }
 
   body {
-    background-color: #f2ede0;
-    /* Aged paper vignette radial gradient */
+    background-color: #f5eedc;
+    /* Rich aged paper vignette radial gradient */
     background-image: radial-gradient(
       circle,
-      #f7f4ed 20%,
-      #ede6d4 75%,
-      #decfa6 100%
+      #faf7f0 20%,
+      #eedfb3 60%,
+      #dfcda0 85%,
+      #c4a36e 100%
     );
     color: #1a1508;
     font-family: "DM Mono", monospace;
@@ -40,10 +41,10 @@
         0deg,
         transparent,
         transparent 27px,
-        rgba(180, 160, 100, 0.12) 28px
+        rgba(180, 150, 90, 0.14) 28px
       ),
       /* base64 SVG fractal noise to replicate real vintage organic paper pulp texture */
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
     will-change: transform;
@@ -57,8 +58,8 @@
     background-image:
       repeating-linear-gradient(
         90deg,
-        rgba(40, 32, 16, 0.09) 0px,
-        rgba(40, 32, 16, 0.09) 1px,
+        rgba(40, 32, 16, 0.1) 0px,
+        rgba(40, 32, 16, 0.1) 1px,
         transparent 1px,
         transparent 56px
       ),
@@ -110,5 +111,40 @@
 .caffeinated-shake {
   display: inline-block;
   animation: jitter 0.15s infinite linear;
+}
+
+/* Typewriter animations */
+.typewriter-char-wrapper {
+  animation: charStrike 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  transform-origin: center bottom;
+}
+
+@keyframes charStrike {
+  0% {
+    filter: blur(2.5px);
+    opacity: 0;
+    transform: scale(1.3) translateY(-2px);
+  }
+  30% {
+    filter: blur(1.5px);
+    opacity: 0.85;
+    transform: scale(1.1) translateY(1px);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.typewriter-cursor {
+  animation: cursorBlink 0.8s steps(2, start) infinite;
+  display: inline-block;
+}
+
+@keyframes cursorBlink {
+  to {
+    visibility: hidden;
+  }
 }
 
