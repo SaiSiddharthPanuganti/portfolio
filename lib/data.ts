@@ -7,7 +7,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/sai-siddharth-panuganti-b2b365270/",
   dribbble: "#",
   github: "https://github.com/SaiSiddharthPanuganti",
-  resumeHref: "../Sai_Siddharth_Resume.pdf",
+  resumeHref: "/Sai_Siddharth_Resume.pdf",
 };
 
 export const heroWords = [
@@ -137,7 +137,7 @@ export const footerMessage = [
 ];
 
 export const quickStats = [
-  { label: "B.E. CGPA", value: "8.31 / 10" },
+  { label: "B.E. CGPA", value: "8.37 / 10" },
   { label: "Diploma CGPA", value: "9.77 / 10" },
   { label: "Dataset Scale", value: "15k+ Samples" },
   { label: "Leadership", value: "Deputy Club Head" },
@@ -155,7 +155,7 @@ export const education = [
     degree: "Bachelor of Engineering in Information Technology",
     institution: "Vasavi College of Engineering",
     period: "2024 - 2027 (Expected)",
-    metric: "CGPA: 8.31 / 10",
+    metric: "CGPA: 8.37 / 10",
     details: "Focusing on data structures, algorithms, object-oriented programming, operating systems, and computer networks."
   },
   {

@@ -307,6 +307,8 @@ export default function Home() {
               </a>
               <a 
                 href={personalInfo.resumeHref} 
+                target="_blank"
+                rel="noreferrer"
                 data-hover="true"
                 className="flex-1 flex justify-center items-center rounded-xl border border-ink bg-paper py-2.5 font-mono text-[11px] uppercase tracking-[0.14em] font-bold shadow-[2px_2px_0px_0px_#1a1508] transition-all hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1.5px_1.5px_0px_0px_#1a1508] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               >
