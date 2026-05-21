@@ -99,9 +99,11 @@ export const techCategories = [
     category: "Web Development",
     bgClass: "bg-red text-paper-dark",
     items: [
-      { name: "Node.js", color: "#3c873a" },
+      { name: "Next.js", color: "#000000" },
       { name: "React.js", color: "#61dafb" },
+      { name: "Node.js", color: "#3c873a" },
       { name: "Express.js", color: "#2d2d2d" },
+      { name: "PostgreSQL", color: "#336791" },
       { name: "MongoDB", color: "#4db33d" },
       { name: "MySQL", color: "#00758f" },
       { name: "REST APIs", color: "#00bcd4" },
