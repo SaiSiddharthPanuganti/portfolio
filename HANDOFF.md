@@ -37,6 +37,9 @@
   - Placed the crumpled filter overlay on a fixed background layer so that page texts remain sharp and legible while the background creases realistically.
   - Set up background layers including a vertical red margin line at `76px`, thin vertical grid columns spaced at `56px`, and blue-grey horizontal rulings spaced at `28px` directly under the paper texture layer.
   - Cleaned up [globals.css](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/globals.css) and replaced the legacy `BurntEdges.tsx` component in [layout.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/layout.tsx).
+- **Removal of 3D Scene Canvas**:
+  - Removed the Three.js `<Scene />` canvas and its dynamic `NoiseBackground` from [layout.tsx](file:///c:/Users/Sai%20Siddharth/Documents/portfolio-v2/next-portfolio/app/layout.tsx) to completely eliminate the bright pink, yellow, and green glowing gradient spots in the background.
+  - This ensures a clean, distraction-free aesthetic displaying strictly the notebook lines and old crumpled paper creases.
 - **Verification**: Completed a clean production build (`npm run build`) with zero compiler warnings or errors.
 
 ### 4. Performance fixes (major lag reduction)
