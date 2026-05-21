@@ -193,7 +193,7 @@ export default function TypewriterGreeting() {
 
       <div className="flex items-center justify-center gap-4 relative py-1 px-4 max-w-full">
         {/* Typewriter content text */}
-        <h1 className="text-sm sm:text-base md:text-lg font-bold text-ink tracking-wide leading-relaxed min-h-[28px] max-w-full flex flex-wrap justify-center">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-ink tracking-wide leading-relaxed min-h-[36px] max-w-full flex flex-wrap justify-center">
           {GREETING_TEXT.split("").map((char, index) => {
             if (index >= displayedCount) return null;
             return (
