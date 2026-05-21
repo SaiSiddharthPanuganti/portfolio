@@ -33,9 +33,9 @@ export const selectedWork = [
     title: "Oil Spill Detection (DeepHyperX)",
     description: "Implemented an end-to-end oil spill identification model using a 3D convolutional framework (DeepHyperX) on hyperspectral and SAR imagery.",
     bullets: [
-      "Enabled reliable detection across hyperspectral and SAR imagery with a 96% accuracy rate.",
-      "Leveraged PCA to compress spectral information, isolating the 10 most influential wavelengths to achieve a 15% classification improvement.",
-      "Derived spill boundaries using fine-grained contour extraction and region-based volumetric analysis."
+      "Implemented an end-to-end oil spill identification model using a 3D convolutional framework (DeepHyperX), enabling reliable detection across hyperspectral and SAR imagery with a 96% accuracy rate.",
+      "Leveraged PCA to compress spectral information and isolate the ten most influential wavelengths, training on a large IEEE GRSS dataset of 10k+ samples to achieve a 15% improvement in classification quality.",
+      "Derived spill boundaries using fine-grained contour extraction and performed region-based volumetric analysis to estimate the overall extent of the affected zone."
     ],
     tags: ["Python", "DeepHyperX", "PCA", "OpenCV", "Machine Learning"],
     metric: "96% accuracy",
@@ -48,7 +48,7 @@ export const selectedWork = [
     description: "Fine-tuned YOLOv8 Nano on PASCAL VOC 2007 and engineered a real-time inference engine.",
     bullets: [
       "Automated a data pipeline to parse 15,000+ XML annotations and normalize coordinates using Pandas.",
-      "Achieved 74.4% mAP50 across 20 classes using fine-tuned YOLOv8 Nano.",
+      "Fine-tuned YOLOv8 Nano on PASCAL VOC 2007, achieving 74.4% mAP50 across 20 classes.",
       "Developed a real-time inference engine using OpenCV for live webcam and video detection."
     ],
     tags: ["Python", "YOLOv8", "Pandas", "OpenCV", "Dataset Pipeline"],
@@ -61,9 +61,9 @@ export const selectedWork = [
     title: "Clips N Quizzez",
     description: "Built an automated quiz generator that extracts YouTube transcripts and generates interactive quizzes with adaptive difficulty.",
     bullets: [
-      "Extracted YouTube transcripts and generated quizzes using Gemini API, drastically reducing manual creation time.",
-      "Automated multiple question formats including MCQs, true/false, and fill-in-the-blanks.",
-      "Enhanced user personalization by enabling adjustable difficulty levels."
+      "Built a MERN-based tool that extracts YouTube transcripts and generates quizzes using Gemini API.",
+      "Automated creation of MCQs, true/false, and fill-in-the-blanks, reducing manual quiz generation time.",
+      "Enhanced user personalization by enabling adjustable difficulty levels to tailor quiz complexity."
     ],
     tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Gemini API"],
     metric: "Interactive AI Quizzes",
@@ -147,10 +147,10 @@ export const quickStats = [
 ];
 
 export const achievements = [
-  "NPTEL Programming in Java — Elite + Gold (Top 1% among 16,000+ learners)",
-  "1st Place — Tech Savishkar 3.0 (Outperforming national-level teams)",
-  "Runner-up — RUDEO Project Expo 2025 (Recognized for technical excellence)",
-  "Runner-up — InnovateX IEEE Hackathon 2025 (High-impact humanitarian solution)",
+  "Secured Elite+Gold certification (Top 1% among 16,000+ participants) in NPTEL’s Programming in Java course, conducted by IIT Kharagpur.",
+  "Secured 1st place in Tech Savishkar 3.0, outperforming national-level teams with an innovative engineering solution.",
+  "Achieved runners-up position at RUDEO Project Expo 2025 (GRIET), recognized for technical excellence and problem-solving impact.",
+  "Secured runners-up position at InnovateX IEEE Hackathon 2025 for developing a high-impact humanitarian technology solution, ranked among the top teams for innovation and societal relevance.",
 ];
 
 export const education = [
