@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import CustomCursor from "@/components/cursor/CustomCursor";
-import BurntEdges from "@/components/ui/BurntEdges";
+import PaperBackground from "@/components/ui/PaperBackground";
 import { Analytics } from "@vercel/analytics/next";
 
 const Scene = dynamic(() => import("@/components/three/Scene"), { ssr: false });
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: "#14100b" }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -29,7 +29,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <Scene />
-        <BurntEdges />
+        <PaperBackground />
         <CustomCursor />
         {children}
         <Analytics />

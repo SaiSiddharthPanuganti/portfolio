@@ -14,64 +14,12 @@
   }
 
   body {
-    background-color: #f5eedc;
-    /* Rich aged paper vignette radial gradient */
-    background-image: radial-gradient(
-      circle,
-      #faf7f0 20%,
-      #eedfb3 60%,
-      #dfcda0 85%,
-      #c4a36e 100%
-    );
+    background-color: transparent;
     color: #1a1508;
     font-family: "DM Mono", monospace;
     min-height: 100vh;
     cursor: none;
     overflow-x: hidden;
-  }
-
-  /* Lined paper background pattern + organic paper noise texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: 
-      /* Horizontal lines */
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 27px,
-        rgba(180, 150, 90, 0.14) 28px
-      ),
-      /* base64 SVG fractal noise to replicate real vintage organic paper pulp texture */
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    will-change: transform;
-  }
-
-  /* Vertical notebook grain lines */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-      repeating-linear-gradient(
-        90deg,
-        rgba(40, 32, 16, 0.1) 0px,
-        rgba(40, 32, 16, 0.1) 1px,
-        transparent 1px,
-        transparent 56px
-      ),
-      linear-gradient(
-        90deg,
-        transparent 0 76px,
-        rgba(200, 39, 30, 0.38) 76px 78px,
-        transparent 78px 100%
-      );
-    pointer-events: none;
-    z-index: 0;
-    will-change: transform;
   }
 }
 
