@@ -58,7 +58,7 @@ export const selectedWork = [
   {
     num: "03",
     tag: "MERN + GenAI · 2025",
-    title: "Clips N Quizzez",
+    title: "VQuiz",
     description: "Built an automated quiz generator that extracts YouTube transcripts and generates interactive quizzes with adaptive difficulty.",
     bullets: [
       "Built a MERN-based tool that extracts YouTube transcripts and generates quizzes using Gemini API.",

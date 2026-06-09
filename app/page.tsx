@@ -369,7 +369,7 @@ export default function Home() {
       {/* Featured Work Section (Click to expand) */}
       <section id="work" className="relative z-10 mx-auto w-full max-w-6xl px-6 py-12 md:px-10">
         <div className="mb-4 font-mono text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-red border-b border-dashed border-ink/15 pb-2">featured work</div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3 items-start">
           {selectedWork.map((work, index) => {
             const isExpanded = expandedIndex === index;
             return (
